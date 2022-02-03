@@ -1,6 +1,7 @@
 package id.co.pg.order.controller;
 
 import id.co.pg.order.dto.OrderDto;
+import id.co.pg.order.request.AddOrderRequest;
 import id.co.pg.order.request.UpdateOrderStatusRequest;
 import id.co.pg.order.service.OrderService;
 import io.swagger.annotations.Api;
@@ -46,6 +47,20 @@ public class OrderController {
             OrderDto orderDto = orderService.updateOrderStatus(updateOrderStatusRequest.getOrderId(),
                     updateOrderStatusRequest.getStatus(),
                     updateOrderStatusRequest.getPartnerId());
+            return new ResponseEntity<>(orderDto, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @ApiOperation(value = "Add Order Status")
+    @PostMapping(
+            value = "/add",
+            consumes = "application/json; charset=UTF-8",
+            produces = "application/json; charset=UTF-8")
+    public ResponseEntity<OrderDto> addOrder(@RequestBody AddOrderRequest addOrderRequest) {
+        try {
+            OrderDto orderDto = orderService.addOrder(addOrderRequest);
             return new ResponseEntity<>(orderDto, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -4,3 +4,7 @@
 pg-price/.mvn/
 
 pg-order/.mvn/
+
+pg-partner/.idea/
+
+pg-partner/pg-partner.iml
